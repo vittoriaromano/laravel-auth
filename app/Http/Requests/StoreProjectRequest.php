@@ -11,7 +11,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
     /**
      * Get the validation rules that apply to the request.
@@ -20,6 +20,14 @@ class StoreProjectRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'project_name' => 'required|max:50|string',
+            'version' => 'required|numeric',
+            'description' => 'required|string',
+            'start_date' => 'required|required|date',
+            'upload_date' => 'required|required|date',
+            'value' => 'numeric',
+            'completed' => 'boolean'
+        ];
     }
 }
