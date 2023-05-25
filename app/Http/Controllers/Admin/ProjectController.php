@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -27,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -38,7 +39,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $project = new Project();
+        $project->fill($data);
+        $project->slug = Str::slug($project->name, '-');
+        $project->completed = $request['completed'] ? 1 : 0;
+        $project->save();
+        return to_route('admin.projects.index');
     }
 
     /**
@@ -60,7 +67,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -72,7 +79,13 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $request->validated();
+        $data = $request->all();
+        $project->update($data);
+        $project->completed = $request['completed'] ? 1 :0;
+        $project->slug = Str::slug($project->project_name, '-');
+        $project->save();
+        return to_route('admin.projects.show', $project->id)->with('message', 'Updated!');
     }
 
     /**
@@ -83,6 +96,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return to_route('admin.projects.index');
     }
 }
