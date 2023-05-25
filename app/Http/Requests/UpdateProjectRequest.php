@@ -27,7 +27,8 @@ class UpdateProjectRequest extends FormRequest
             'start_date' => 'required|required|date',
             'upload_date' => 'required|required|date',
             'value' => 'numeric',
-            'completed' => 'boolean'
+            'completed' => 'boolean',
+            'image'=>'nullable|image'
         ];
     }
 }

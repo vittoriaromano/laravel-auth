@@ -8,6 +8,9 @@
         <h2 class="my-3 text-center">Project Details</h2>
         <div class="align-items-center">
             <h4>Project's name: {{ $project->project_name }}</h4>
+            @if (isset($project->image))
+             <img src="{{ asset('storage/' . $project->image) }}" alt='{{ $project->project_name . ' image' }}'>
+            @endif
             <div>Project's version: {{ $project->version }}</div>
             <div>Project's description: {{ $project->description }}€</div>
             <div>Project's start date: {{ $project->start_date }}</div>

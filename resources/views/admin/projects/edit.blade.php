@@ -14,12 +14,17 @@
             <h2 class="my-3 text-center">Project Edit</h2>
         </div>
 
-        <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+        <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" >
             @csrf
             @method('PUT')
             <div class="mb-3">
                 <label for="project_name" class="form-label">Project name</label>
                 <input type="text" class="form-control" id="project_name" name="project_name" value="{{ old('project_name', $project->project_name) }}">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input class="form-control" type="file" id="image" name="image">
+                
             </div>
             <div class="mb-3">
                 <label for="version" class="form-label">Version</label>
