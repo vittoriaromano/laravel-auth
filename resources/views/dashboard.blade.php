@@ -16,8 +16,8 @@
                         {{ session('status') }}
                     </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                    {{-- {{ __('You are logged in!') }} --}}
+                    <a href="{{ Route('admin.projects.index') }}">My projects</a>
                 </div>
             </div>
         </div>
